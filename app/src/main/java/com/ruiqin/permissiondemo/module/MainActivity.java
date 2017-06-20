@@ -147,13 +147,11 @@ public class MainActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case CALL_PHONE_REQUESTCODE://电话权限
-                for (int i = 0; i < grantResults.length; i++) {
-                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {//未授权
-                        boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permissions[i]);//是否显示权限弹窗
-                        if (!showRequestPermission) {//禁用请求权限弹窗(用户勾选进入后不再询问)
-                            mShowRequestPermission = false;
-                            break;
-                        }
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {//未授权
+                    boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permissions[0]);//是否显示权限弹窗
+                    if (!showRequestPermission) {//禁用请求权限弹窗(用户勾选进入后不再询问)
+                        mShowRequestPermission = false;
+                        break;
                     }
                 }
                 if (!mShowRequestPermission) {
