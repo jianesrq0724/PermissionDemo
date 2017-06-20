@@ -1,21 +1,14 @@
 package com.ruiqin.permissiondemo.module;
 
 import android.Manifest;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 
-import com.blankj.utilcode.util.AppUtils;
 import com.ruiqin.permissiondemo.R;
 import com.ruiqin.permissiondemo.base.BaseActivity;
-import com.ruiqin.permissiondemo.until.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +19,7 @@ import java.util.List;
  */
 public class WelcomeActivity extends BaseActivity {
 
-    String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    String[] permissions = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     List<String> mPermissionList = new ArrayList<>();
 
     @Override
@@ -58,87 +51,33 @@ public class WelcomeActivity extends BaseActivity {
     }
 
 
-    boolean mIsBannedPermission = false;//用户是否禁止权限
+    boolean mShowRequestPermission = true;//用户是否禁止权限
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case 1:
                 for (int i = 0; i < grantResults.length; i++) {
                     if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                        //判断是否未禁止权限
-                        boolean bannedPermission = ActivityCompat.shouldShowRequestPermissionRationale(WelcomeActivity.this, permissions[i]);
-                        if (bannedPermission) {
+                        //判断是否勾选禁止后不再询问
+                        boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(WelcomeActivity.this, permissions[i]);
+                        if (showRequestPermission) {//
                             judgePermission();//重新申请权限
                             return;
                         } else {
-                            mIsBannedPermission = true;//已经禁止
-                            break;
+                            mShowRequestPermission = false;//已经禁止
                         }
                     }
                 }
 
-                /**
-                 * 循环结束
-                 */
-                if (mIsBannedPermission) {//禁止，跳转对话框
-                    showPermissionDialog();
-                } else {
-                    judgePermission();
-                }
+                startActivity(MainActivity.newIntent(mContext));
+                finish();
                 break;
             default:
                 break;
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 
-    AlertDialog mPermissionDialog;
-
-    /**
-     * 展示对话框
-     */
-    private void showPermissionDialog() {
-        if (mPermissionDialog == null) {
-            mPermissionDialog = new AlertDialog.Builder(mContext)
-                    .setTitle("权限申请")
-                    .setPositiveButton("设置", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            cancelPermissionDialog();
-                            Uri packageURI = Uri.parse("package:" + AppUtils.getAppPackageName());
-                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageURI);
-                            startActivity(intent);
-                            ToastUtils.show("设置");
-                        }
-                    })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            cancelPermissionDialog();
-                            ToastUtils.show("取消");
-                        }
-                    })
-                    .create();
-        }
-        mPermissionDialog.show();
-    }
-
-    /**
-     * 取消权限对话框
-     *
-     * @return
-     */
-    private void cancelPermissionDialog() {
-        if (mPermissionDialog != null) {
-            mPermissionDialog.cancel();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        cancelPermissionDialog();
     }
 
     @Override
