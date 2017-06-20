@@ -153,6 +153,7 @@ public class MainActivity extends BaseActivity {
                         mShowRequestPermission = false;
                         break;
                     }
+
                 }
                 if (!mShowRequestPermission) {
                     showPermissionDialog();
