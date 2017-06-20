@@ -122,6 +122,8 @@ public class MainActivity extends BaseActivity {
         mAlertDialog.show();
     }
 
+    private static final int CALL_PHONE_REQUESTCODE = 1;//权限申请响应码
+
     /**
      * 拨打电话
      */
@@ -130,7 +132,7 @@ public class MainActivity extends BaseActivity {
          * 判断权限
          */
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 0);
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, CALL_PHONE_REQUESTCODE);
         } else {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel://10086"));
             startActivity(intent);
@@ -144,23 +146,21 @@ public class MainActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case 1:
+            case CALL_PHONE_REQUESTCODE://电话权限
                 for (int i = 0; i < grantResults.length; i++) {
                     if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {//未授权
                         boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permissions[i]);//是否显示权限弹窗
-                        if (showRequestPermission) {//有请求权限弹窗(用户未勾选进入后不再询问)
-                            startCallPhone();//重新申请权限
-                            return;
-                        } else {
+                        if (!showRequestPermission) {//禁用请求权限弹窗(用户勾选进入后不再询问)
                             mShowRequestPermission = false;
+                            break;
                         }
                     }
                 }
-                if (mShowRequestPermission) {
-                    startCallPhone();
-                } else {
+                if (!mShowRequestPermission) {
                     showPermissionDialog();
                 }
+                break;
+            default:
                 break;
         }
     }
