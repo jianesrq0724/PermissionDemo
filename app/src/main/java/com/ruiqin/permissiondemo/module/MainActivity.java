@@ -52,50 +52,8 @@ public class MainActivity extends BaseActivity {
      */
     @OnClick(R.id.call_phone)
     public void onClick() {
-        judgePermission();
+        showCallPhoneDialog();//展示拨打电话对话框
     }
-
-    /**
-     * 判断权限
-     */
-    private void judgePermission() {
-        /**
-         * 判断权限
-         */
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
-        } else {
-            showCallPhoneDialog();
-        }
-    }
-
-    boolean mShowRequestPermission = true;
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 1:
-                for (int i = 0; i < grantResults.length; i++) {
-                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {//未授权
-                        boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permissions[i]);//是否显示权限弹窗
-                        if (showRequestPermission) {//有请求权限弹窗(用户未勾选进入后不再询问)
-                            judgePermission();//重新申请权限
-                            return;
-                        } else {
-                            mShowRequestPermission = false;
-                        }
-                    }
-                }
-                if (mShowRequestPermission) {
-                    startCallPhone();
-                } else {
-                    showPermissionDialog();
-                }
-                break;
-        }
-    }
-
 
     AlertDialog mPermissionDialog;
 
@@ -178,6 +136,35 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         }
     }
+
+
+    boolean mShowRequestPermission = true;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {//未授权
+                        boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permissions[i]);//是否显示权限弹窗
+                        if (showRequestPermission) {//有请求权限弹窗(用户未勾选进入后不再询问)
+                            startCallPhone();//重新申请权限
+                            return;
+                        } else {
+                            mShowRequestPermission = false;
+                        }
+                    }
+                }
+                if (mShowRequestPermission) {
+                    startCallPhone();
+                } else {
+                    showPermissionDialog();
+                }
+                break;
+        }
+    }
+
 
     private void cancelCallPhoneDialog() {
         if (mAlertDialog != null) {
