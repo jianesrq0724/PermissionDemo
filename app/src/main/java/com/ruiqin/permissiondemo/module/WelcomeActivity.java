@@ -41,6 +41,9 @@ public class WelcomeActivity extends BaseActivity {
             }
         }
 
+        /**
+         * 判断是否为空
+         */
         if (mPermissionList.isEmpty()) {//未授予的权限为空，表示都授予了
             startActivity(MainActivity.newIntent(mContext));
             finish();
