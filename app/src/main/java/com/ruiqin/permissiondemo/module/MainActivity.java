@@ -151,9 +151,7 @@ public class MainActivity extends BaseActivity {
                     boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permissions[0]);//是否显示权限弹窗
                     if (!showRequestPermission) {//禁用请求权限弹窗(用户勾选进入后不再询问)
                         mShowRequestPermission = false;
-                        break;
                     }
-
                 }
                 if (!mShowRequestPermission) {
                     showPermissionDialog();
