@@ -12,6 +12,10 @@ import com.ruiqin.permissiondemo.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by ruiqin.shen on 2017/6/18.
@@ -45,12 +49,26 @@ public class WelcomeActivity extends BaseActivity {
          * 判断是否为空
          */
         if (mPermissionList.isEmpty()) {//未授予的权限为空，表示都授予了
-            startActivity(MainActivity.newIntent(mContext));
-            finish();
+            delayEntryPage();
         } else {//请求权限方法
             String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
             ActivityCompat.requestPermissions(WelcomeActivity.this, permissions, 1);
         }
+    }
+
+    /**
+     * 延迟进入页面，为了增加用户体检效果
+     * 一般在欢迎界面停留几秒
+     * 使用RxJava的标识符来实现延迟效果
+     */
+    private void delayEntryPage() {
+        Flowable.timer(1200, TimeUnit.MILLISECONDS).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull Long aLong) throws Exception {
+                startActivity(MainActivity.newIntent(mContext));
+                finish();
+            }
+        }, Throwable::printStackTrace);
     }
 
 
@@ -73,9 +91,7 @@ public class WelcomeActivity extends BaseActivity {
                         }
                     }
                 }
-
-                startActivity(MainActivity.newIntent(mContext));
-                finish();
+                delayEntryPage();
                 break;
             default:
                 break;
