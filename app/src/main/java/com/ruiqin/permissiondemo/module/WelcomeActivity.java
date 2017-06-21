@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.widget.TextView;
 
 import com.ruiqin.permissiondemo.R;
 import com.ruiqin.permissiondemo.base.BaseActivity;
@@ -14,8 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Flowable;
-import io.reactivex.functions.Consumer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by ruiqin.shen on 2017/6/18.
@@ -25,6 +27,8 @@ public class WelcomeActivity extends BaseActivity {
 
     String[] permissions = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     List<String> mPermissionList = new ArrayList<>();
+    @BindView(R.id.textView)
+    TextView mTextView;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -62,13 +66,11 @@ public class WelcomeActivity extends BaseActivity {
      * 使用RxJava的标识符来实现延迟效果
      */
     private void delayEntryPage() {
-        Flowable.timer(1200, TimeUnit.MILLISECONDS).subscribe(new Consumer<Long>() {
-            @Override
-            public void accept(@io.reactivex.annotations.NonNull Long aLong) throws Exception {
-                startActivity(MainActivity.newIntent(mContext));
-                finish();
-            }
-        }, Throwable::printStackTrace);
+        Flowable.timer(1200, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> {
+                    startActivity(MainActivity.newIntent(mContext));//跳转到主界面
+                }, Throwable::printStackTrace);
     }
 
 
