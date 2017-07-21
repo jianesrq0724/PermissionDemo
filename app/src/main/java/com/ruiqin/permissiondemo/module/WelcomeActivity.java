@@ -39,10 +39,10 @@ public class WelcomeActivity extends BaseActivity {
      * 判断权限申请
      */
     private void judgePermission() {
-        mPermissionList.clear();
         /**
          * 判断哪些权限未授予
          */
+        mPermissionList.clear();
         for (int i = 0; i < permissions.length; i++) {
             if (ContextCompat.checkSelfPermission(mContext, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
                 mPermissionList.add(permissions[i]);
@@ -98,7 +98,6 @@ public class WelcomeActivity extends BaseActivity {
             default:
                 break;
         }
-
     }
 
     @Override
