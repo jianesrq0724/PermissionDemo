@@ -35,6 +35,9 @@ public class WelcomeActivity extends BaseActivity {
         judgePermission();
     }
 
+
+    private static final int REQUEST_CODE_PERMISISON = 1;
+
     /**
      * 判断权限申请
      */
@@ -56,7 +59,7 @@ public class WelcomeActivity extends BaseActivity {
             delayEntryPage();
         } else {//请求权限方法
             String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
-            ActivityCompat.requestPermissions(WelcomeActivity.this, permissions, 1);
+            ActivityCompat.requestPermissions(WelcomeActivity.this, permissions, REQUEST_CODE_PERMISISON);
         }
     }
 
@@ -70,29 +73,22 @@ public class WelcomeActivity extends BaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aLong -> {
                     startActivity(MainActivity.newIntent(mContext));//跳转到主界面
+                    finish();
                 }, Throwable::printStackTrace);
     }
 
-
-    boolean mShowRequestPermission = true;//用户是否禁止权限
-
+    /**
+     * 在首页不管用户，不管用户拒绝还是同意，都进入首页
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case 1:
-                for (int i = 0; i < grantResults.length; i++) {
-                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                        //判断是否勾选禁止后不再询问
-                        boolean showRequestPermission = ActivityCompat.shouldShowRequestPermissionRationale(WelcomeActivity.this, permissions[i]);
-                        if (showRequestPermission) {//
-                            judgePermission();//重新申请权限
-                            return;
-                        } else {
-                            mShowRequestPermission = false;//已经禁止
-                        }
-                    }
-                }
+            case REQUEST_CODE_PERMISISON:
                 delayEntryPage();
                 break;
             default:
