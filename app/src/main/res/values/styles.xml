@@ -6,6 +6,35 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+    <!--透明主题-->
+    <style name="AppTransparentTheme" parent="@style/AppTheme">
+        <!--设置透明需要下面两个属性一起使用-->
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:buttonStyle">@android:style/Widget.Button.Small</item>
+    </style>
+
+    <!--toolBar的主题-->
+    <style name="ToolbarTheme" parent="@style/AppTheme">
+        <item name="android:actionMenuTextColor">@color/text_black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--横线统一的样式-->
+    <style name="line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.2dp</item>
+        <item name="android:background">@color/line</item>
+    </style>
+
+    <!--自定义dialog主题-->
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/transparent</item>//这句话不能少，否则dialog会出现黑色边框
     </style>
 
 </resources>

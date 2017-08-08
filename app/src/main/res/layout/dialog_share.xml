@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/line"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="25dp"
+    android:paddingTop="21dp">
+
+    <TextView
+        android:id="@+id/share_wx_circle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/icon_share_wx_circle"
+        android:gravity="center_horizontal"
+        android:text="朋友圈"
+        android:textColor="@color/text_black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/share_wx_chat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/icon_share_wx_chat"
+        android:gravity="center_horizontal"
+        android:text="微信好友"
+        android:textColor="@color/text_black"
+        android:textSize="12sp" />
+
+    <!--qq空间-->
+    <TextView
+        android:id="@+id/share_qq_space"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/icon_share_qq_space"
+        android:gravity="center_horizontal"
+        android:text="QQ空间"
+        android:textColor="@color/text_black"
+        android:textSize="12sp" />
+
+    <!--qq-->
+    <TextView
+        android:id="@+id/share_qq_chat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/icon_share_qq_chat"
+        android:gravity="center_horizontal"
+        android:text="QQ群好友"
+        android:textColor="@color/text_black"
+        android:textSize="12sp" />
+
+
+</LinearLayout>
+

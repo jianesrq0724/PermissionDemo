@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#424954</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorAccent">#FF4081</color>
 
     <!-- 背景色 -->
     <color name="background">#F5F6F8</color>
@@ -11,34 +11,15 @@
     <color name="text_black">#424954</color>
 
     <!--文本黑色2-->
-    <color name="text_black6">#666666</color>
+    <color name="text_black2">#666666</color>
     <!--文本黑色3-->
     <color name="text_black3">#333333</color>
     <!-- 文本 hint -->
     <color name="text_gray">#999999</color>
-
-    <!--文本黄色-->
-    <color name="text_yellow">#BB6100</color>
-
-    <color name="text_yellow2">#FFB630</color>
-
-    <color name="text_yellow3">#FFE9D2</color>
-
-    <color name="text_yellow4">#FF8301</color>
-
-    <color name="text_gray7">#777777</color>
-
-    <color name="bluer">#37ABE5</color>
-
-    <color name="bluer2">#4B5FC1</color>
-
-    <color name="bluer3">#633AE1</color>
-
+    <color name="bluer">#389DF2</color>
     <color name="gray">#999999</color>
     <!-- 白色 -->
     <color name="white">#FFFFFF</color>
-
-    <color name="white1">#FFFCF1</color>
 
     <!-- 横线灰色 -->
     <color name="line">#E5E5E5</color>
@@ -49,14 +30,6 @@
 
     <!--黄色-->
     <color name="yellow">#FBA90F</color>
-
-    <!--橙色-->
-    <color name="yelow1">#FFB530</color>
-
-    <color name="yellow2">#FEBB2C</color>
-
-    <color name="yellow3">#FFB960</color>
-
     <!-- 黑色 -->
     <color name="black">#424954</color>
     <!-- 绿色-->
@@ -69,13 +42,14 @@
     <!--文本红色-->
     <color name="text_red">#FF4C4C</color>
 
-    <color name="text_red2">#F16C45</color>
-
     <!--文本白色-->
     <color name="text_white">#FFFFFF</color>
 
     <!--文本蓝色-->
-    <color name="text_bluer">#37ABE5</color>
+    <color name="text_bluer">#3498DB</color>
+
+
+    <color name="text_bluer2">#4499F8</color>
 
     <color name="authen_line">#DDDDDD</color>
 
