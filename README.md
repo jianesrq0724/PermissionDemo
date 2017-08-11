@@ -13,6 +13,6 @@
 1. 进入首页用户未授予权限 
 ![](https://github.com/jianesrq0724/PermissionDemo/blob/develop/gif/1.gif)
 
-1. 用户授予权限
+1. 用户授予权限 
 ![](https://github.com/jianesrq0724/PermissionDemo/blob/develop/gif/2.gif)
 
