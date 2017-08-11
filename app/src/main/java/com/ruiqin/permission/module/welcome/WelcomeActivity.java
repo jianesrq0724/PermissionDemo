@@ -91,7 +91,6 @@ public class WelcomeActivity extends BaseActivity {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
                 break;
         }
-
     }
 
 

@@ -77,13 +77,13 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
 
     @OnClick(R.id.btn_call_phone)
     public void onViewClicked() {
-        checkCallPhonePermission();//检查权限
+        checkCallPhonePermission();//检查电话权限，并申请
     }
 
     private static final int CALL_PHONE_PERMISSION = 1;
 
     /**
-     * 检查权限
+     * 检查电话权限
      */
     private void checkCallPhonePermission() {
         if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -95,10 +95,6 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
 
     /**
      * 响应权限
-     *
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
