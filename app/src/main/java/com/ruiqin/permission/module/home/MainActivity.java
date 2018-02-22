@@ -158,7 +158,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
         mTipCustomDialog.setMesage("是否拨打电话");
     }
 
-    // TODO: 2018/2/22 1234测试同步 
+    // TODO: 2018/2/22 1234测试同步 123
 
 
     /**
