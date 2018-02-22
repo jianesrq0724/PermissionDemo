@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +14,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.blankj.utilcode.util.PhoneUtils;
 import com.ruiqin.permission.R;
 import com.ruiqin.permission.base.BaseActivity;
 import com.ruiqin.permission.commonality.view.PermissionTipDialog;
@@ -145,12 +145,29 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
             mTipCustomDialog.setPositiveButton("拨打", new TipCustomDialog.OnClickListener() {
                 @Override
                 public void onClick() {
-                    PhoneUtils.call("10086");
+                    try {
+                        call("10086");
+                    } catch (Exception e) {
+                        showPermission();
+                        e.printStackTrace();
+                    }
                 }
             });
         }
         mTipCustomDialog.show();
         mTipCustomDialog.setMesage("是否拨打电话");
+    }
+
+
+    /**
+     * 拨打电话
+     *
+     * @param phoneNumber
+     */
+    public void call(String phoneNumber) {
+        Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + phoneNumber));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }
