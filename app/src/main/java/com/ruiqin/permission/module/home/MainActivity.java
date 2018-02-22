@@ -157,6 +157,8 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
         mTipCustomDialog.show();
         mTipCustomDialog.setMesage("是否拨打电话");
     }
+    
+    //test2018
 
 
     /**
