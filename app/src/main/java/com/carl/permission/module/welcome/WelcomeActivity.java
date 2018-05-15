@@ -30,6 +30,7 @@ public class WelcomeActivity extends BaseActivity {
     String[] permissions = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     List<String> mPermissionList = new ArrayList<>();
 
+    private static final int PERMISSION_REQUEST = 1;
 
     @Override
     protected void findView() {
@@ -64,7 +65,6 @@ public class WelcomeActivity extends BaseActivity {
         return R.layout.activity_welcome;
     }
 
-    private static final int PERMISSION_REQUEST = 1;
 
     /**
      * 检查权限

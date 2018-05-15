@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
 import android.widget.Button;
 
 import com.carl.permission.R;
@@ -53,13 +52,10 @@ public class MainActivity extends BaseActivity<MainI, MainPresenter> implements 
 
     @Override
     public void setOnInteractListener() {
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //检查电话权限，并申请
-                checkCallPhonePermission();
-//                mPresenter.testLogin();
-            }
+        mButton.setOnClickListener(v -> {
+            //检查电话权限，并申请
+            checkCallPhonePermission();
+//            mPresenter.testLogin();
         });
     }
 
@@ -83,7 +79,7 @@ public class MainActivity extends BaseActivity<MainI, MainPresenter> implements 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //部分手机上，可能会出现grantResult length为0的情况
-        if (grantResults == null || grantResults.length == 0) {
+        if (grantResults.length == 0) {
             showPermission();
             return;
         }
@@ -123,21 +119,15 @@ public class MainActivity extends BaseActivity<MainI, MainPresenter> implements 
     private void showCallPhone() {
         if (mTipCustomDialog == null) {
             mTipCustomDialog = new TipCustomDialog(mContext);
-            mTipCustomDialog.setNegativeButton("取消", new TipCustomDialog.OnClickListener() {
-                @Override
-                public void onClick() {
+            mTipCustomDialog.setNegativeButton("取消", () -> {
 
-                }
             });
-            mTipCustomDialog.setPositiveButton("拨打", new TipCustomDialog.OnClickListener() {
-                @Override
-                public void onClick() {
-                    try {
-                        call("10086");
-                    } catch (Exception e) {
-                        showPermission();
-                        e.printStackTrace();
-                    }
+            mTipCustomDialog.setPositiveButton("拨打", () -> {
+                try {
+                    call("10086");
+                } catch (Exception e) {
+                    showPermission();
+                    e.printStackTrace();
                 }
             });
         }
