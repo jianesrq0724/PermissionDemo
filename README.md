@@ -1,6 +1,8 @@
 > # PermissionDemo
 > #Android动态权限Demo
 
+# 注意：完成了权限的封装，需要查看未封装的，可以切换到permission_noaml分支上
+
 关于动态权限的一些介绍和代码介绍，这篇博文 [android6.0运行时权限扩展篇](http://blog.csdn.net/jianesrq0724/article/details/77100942)
 
 代码中使用了RxJava和Lambda表达式，
