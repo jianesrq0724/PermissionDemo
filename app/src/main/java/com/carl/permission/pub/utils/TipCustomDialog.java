@@ -71,23 +71,17 @@ public class TipCustomDialog extends Dialog {
     }
 
     private void setOnclickListener() {
-        mBtnNegative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mNegativeButtonListener != null) {
-                    mNegativeButtonListener.onClick();
-                    cancel();
-                }
+        mBtnNegative.setOnClickListener(v -> {
+            if (mNegativeButtonListener != null) {
+                mNegativeButtonListener.onClick();
+                cancel();
             }
         });
 
-        mBtnPosition.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mPositiveButtonListener != null) {
-                    mPositiveButtonListener.onClick();
-                    cancel();
-                }
+        mBtnPosition.setOnClickListener(v -> {
+            if (mPositiveButtonListener != null) {
+                mPositiveButtonListener.onClick();
+                cancel();
             }
         });
 

@@ -1,14 +1,9 @@
 package com.carl.permission.module.home.view;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.widget.Button;
 
 import com.carl.permission.R;
@@ -27,6 +22,9 @@ import com.carl.permission.pub.utils.ToastUtils;
 public class MainActivity extends BaseActivity<MainI, MainPresenter> implements MainI {
 
     private Button mButton;
+    private Button mButton2;
+
+    private static final int CALL_PHONE_PERMISSION = 1;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
@@ -37,6 +35,7 @@ public class MainActivity extends BaseActivity<MainI, MainPresenter> implements 
     @Override
     protected void findView() {
         mButton = findViewById(R.id.button);
+        mButton2 = findViewById(R.id.button2);
     }
 
     @Override
@@ -54,47 +53,35 @@ public class MainActivity extends BaseActivity<MainI, MainPresenter> implements 
     public void setOnInteractListener() {
         mButton.setOnClickListener(v -> {
             //检查电话权限，并申请
-            checkCallPhonePermission();
+//            checkCallPhonePermission();
 //            mPresenter.testLogin();
-        });
-    }
-
-    private static final int CALL_PHONE_PERMISSION = 1;
-
-    /**
-     * 检查电话权限
-     */
-    private void checkCallPhonePermission() {
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.CALL_PHONE}, CALL_PHONE_PERMISSION);
-        } else {
-            showCallPhone();
-        }
-    }
-
-
-    /**
-     * 响应权限
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        //部分手机上，可能会出现grantResult length为0的情况
-        if (grantResults.length == 0) {
-            showPermission();
-            return;
-        }
-        switch (requestCode) {
-            case CALL_PHONE_PERMISSION:
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    showPermission();
-                    return;
+            permissions("电话权限", new String[]{Manifest.permission.CALL_PHONE}, new PermissionsResultListener() {
+                @Override
+                public void onPermissionGranted() {
+                    showCallPhone();
                 }
-                showCallPhone();
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                break;
-        }
+
+                @Override
+                public void onPermissionDenied() {
+                    showPermission();
+                }
+            });
+        });
+
+        mButton2.setOnClickListener(view -> {
+            permissions("短信", new String[] {Manifest.permission.SEND_SMS}, new PermissionsResultListener(){
+
+                @Override
+                public void onPermissionGranted() {
+                    ToastUtils.showShort("短信 授予");
+                }
+
+                @Override
+                public void onPermissionDenied() {
+                    ToastUtils.showShort("短信拒绝");
+                }
+            });
+        });
     }
 
 

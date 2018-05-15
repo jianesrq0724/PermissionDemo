@@ -43,19 +43,9 @@ public class PermissionTipDialog extends Dialog {
     }
 
     private void setOnclickListener() {
-        findViewById(R.id.btn_negative).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancel();
-            }
-        });
+        findViewById(R.id.btn_negative).setOnClickListener(v -> cancel());
 
-        findViewById(R.id.btn_setting).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickSetting();
-            }
-        });
+        findViewById(R.id.btn_setting).setOnClickListener(v -> onClickSetting());
     }
 
 
