@@ -1,10 +1,6 @@
 > # PermissionDemo
 > #Android动态权限Demo
 
-* 是否引入ButterKnife
-* ButterKnife在library和组件化的时候很不方便，这里先不适用ButterKnkife，使用findViewById,后期考虑databinding
-* 插件Android Layout ID convert可以方便的生成findViewById
-
 关于动态权限的一些介绍和代码介绍，这篇博文 [android6.0运行时权限扩展篇](http://blog.csdn.net/jianesrq0724/article/details/77100942)
 
 代码中使用了RxJava和Lambda表达式，
@@ -19,6 +15,11 @@
 
 1. 用户授予权限  
 ![](https://github.com/jianesrq0724/PermissionDemo/blob/master/gif/2.gif)
+
+
+* 是否引入ButterKnife
+* ButterKnife在library和组件化的时候很不方便，这里先不适用ButterKnkife，使用findViewById,后期考虑databinding
+* 插件Android Layout ID convert可以方便的生成findViewById
 
 ## RxManage 对线程管理
 
