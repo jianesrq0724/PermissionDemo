@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="300dp"
-             android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
@@ -22,7 +22,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="80dp"/>
+                android:layout_height="80dp" />
 
             <TextView
                 android:id="@+id/tv_message"
@@ -31,15 +31,15 @@
                 android:lineSpacingExtra="8dp"
                 android:paddingLeft="28dp"
                 android:paddingRight="28dp"
-                android:text="赏金已发放到您的账户余额里，您可到“我->我的余额”里查看"
+                android:text="content"
                 android:textColor="@color/text_black"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="25dp"/>
+                android:layout_height="25dp" />
 
-            <View style="@style/line"/>
+            <View style="@style/horizontal_line_style" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,14 +52,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
-                    android:text="知道了"
+                    android:text="cancel"
                     android:textColor="@color/bluer"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <View
                     android:layout_width="0.2dp"
                     android:layout_height="match_parent"
-                    android:background="@color/line"/>
+                    android:background="@color/line_color" />
 
                 <Button
                     android:id="@+id/btn_position"
@@ -67,9 +67,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
-                    android:text="去提现"
+                    android:text="ok"
                     android:textColor="@color/bluer"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -81,5 +81,5 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/cardView"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/icon_borrow_tip"/>
+        android:src="@drawable/icon_borrow_tip" />
 </FrameLayout>
