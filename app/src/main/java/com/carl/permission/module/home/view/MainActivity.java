@@ -69,16 +69,16 @@ public class MainActivity extends BaseActivity<MainI, MainPresenter> implements 
         });
 
         mButton2.setOnClickListener(view -> {
-            permissions("短信", new String[] {Manifest.permission.SEND_SMS}, new PermissionsResultListener(){
+            permissions("短信", new String[]{Manifest.permission.SEND_SMS}, new PermissionsResultListener() {
 
                 @Override
                 public void onPermissionGranted() {
-                    ToastUtils.showShort("短信 授予");
+                    ToastUtils.showShort("短信权限授予");
                 }
 
                 @Override
                 public void onPermissionDenied() {
-                    ToastUtils.showShort("短信拒绝");
+                    ToastUtils.showShort("短信权限拒绝");
                 }
             });
         });
