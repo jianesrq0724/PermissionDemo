@@ -179,7 +179,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         clickable = false;
     }
 
-    private PermissionsResultListener mListener;
+    private PermissionsResultListener mPermissionListener;
 
     List<String> mPermissionList = new ArrayList<>();
 
@@ -187,9 +187,9 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     /**
      * 分装权限申请
      */
-    public void permissions(String desc, String[] permissions, PermissionsResultListener listener) {
+    public void permissions(String desc, String[] permissions, PermissionsResultListener permissionListener) {
         mPermissionList.clear();
-        mListener = listener;
+        mPermissionListener = permissionListener;
         /**
          * 判断哪些权限未授予
          */
@@ -203,7 +203,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
          * 为空，表示都授予了
          */
         if (mPermissionList.isEmpty()) {
-            mListener.onPermissionGranted();
+            mPermissionListener.onPermissionGranted();
         } else {//请求权限方法
             ActivityCompat.requestPermissions(this, mPermissionList.toArray(new String[mPermissionList.size()]), 1);
         }
@@ -215,18 +215,18 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //部分手机上，可能会出现grantResult length为0的情况
         if (grantResults.length == 0) {
-            mListener.onPermissionDenied();
+            mPermissionListener.onPermissionDenied();
             return;
         }
 
         int grantLength = grantResults.length;
         for (int i = 0; i < grantLength; i++) {
             if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                mListener.onPermissionDenied();
+                mPermissionListener.onPermissionDenied();
                 return;
             }
         }
-        mListener.onPermissionGranted();
+        mPermissionListener.onPermissionGranted();
     }
 
     /**
