@@ -24,8 +24,6 @@ public class MainActivity extends BaseActivity<MainI, MainPresenter> implements 
     private Button mButton;
     private Button mButton2;
 
-    private static final int CALL_PHONE_PERMISSION = 1;
-
     public static void startActivity(Context context) {
         Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
         context.startActivity(intent);
@@ -52,9 +50,8 @@ public class MainActivity extends BaseActivity<MainI, MainPresenter> implements 
     @Override
     public void setOnInteractListener() {
         mButton.setOnClickListener(v -> {
-            //检查电话权限，并申请
-//            checkCallPhonePermission();
 //            mPresenter.testLogin();
+            //检查电话权限，并申请
             permissions("电话权限", new String[]{Manifest.permission.CALL_PHONE}, new PermissionsResultListener() {
                 @Override
                 public void onPermissionGranted() {

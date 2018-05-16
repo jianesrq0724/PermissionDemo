@@ -23,8 +23,6 @@ public class WelcomeActivity extends BaseActivity {
 
     String[] permissions = new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-    private static final int PERMISSION_REQUEST = 1;
-
     @Override
     protected void findView() {
 
